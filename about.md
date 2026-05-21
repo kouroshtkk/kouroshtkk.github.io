@@ -2,6 +2,7 @@
 layout: default
 title: "About Me"
 permalink: /about/
+nav_order: 1
 ---
 
 [Home](/) | [About](/about/)
