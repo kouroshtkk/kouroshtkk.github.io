@@ -1,11 +1,8 @@
 ---
 layout: default
 title: "About Me"
-permalink: /about/
 nav_order: 1
 ---
-
-[Home](/) | [About](/about/)
 
 <img src="/profile.jpeg" alt="A photo of me" width="250">
 
