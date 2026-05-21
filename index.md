@@ -3,7 +3,6 @@ layout: default
 title: Home
 ---
 
-[Home](/) | [About](/about/) 
 
 # Recent Posts
 
