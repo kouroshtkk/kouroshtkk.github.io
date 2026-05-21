@@ -3,7 +3,7 @@ layout: default
 title: "About Me"
 permalink: /about/
 ---
-<img src="/profile.jpg" alt="A photo of me" width="250">
+<img src="/profile.jpeg" alt="A photo of me" width="250">
 
 I am Kourosh Sarabadani, Computer Science student living in Genova,Italy.
 I was graduated in piano performance in University of Tehran.
