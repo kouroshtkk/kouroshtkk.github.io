@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Jump table in assembly"
-parent: "CTF Writeups"
+parent: "pwn.college writeups"
 ---
 # Intro
 
