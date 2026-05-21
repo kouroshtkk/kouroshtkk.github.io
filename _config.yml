@@ -1,7 +1,6 @@
-title: "Kourosh's Blog"
-remote_theme: "b2a3e8/jekyll-theme-console"
-plugins:
-  - jekyll-remote-theme
+title: "Kourosh's Notes"
+description: "C, CTFs, and Low-Level Programming"
+remote_theme: just-the-docs/just-the-docs
 
-# This tells the theme to use its dark mode syntax highlighting
-highlighter: rouge
+color_scheme: dark
+search_enabled: true
