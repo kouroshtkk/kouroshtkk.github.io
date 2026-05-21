@@ -7,7 +7,6 @@ date: 2026-05-21
 # Intro
 This challenge compares the `argv[1]` with the password to give you the flag.
 this is what disassembly looks like:
-it looks like the program loads the `argv[1]` that is pointed by `rsp+16` into `rdi`, then stores a string in rsp
 ```nasm
 0000000000401000 <_start>:
   401000:	48 8b 7c 24 10       	mov    rdi,QWORD PTR [rsp+0x10]
@@ -57,6 +56,12 @@ it looks like the program loads the `argv[1]` that is pointed by `rsp+16` into `
   40109f:	48 c7 c0 3c 00 00 00 	mov    rax,0x3c
   4010a6:	0f 05                	syscall
 ```
+it looks like the program loads the `argv[1]` that is pointed by `rsp+16` into `rdi`, then stores a string in `rsp` and then loads it in `rsi` and then compares the contents of `argv[1]` with `rsi` character by character.
+
 
 # Process
 
+I will run it with gdp to see what is stored is `rsp`:
+![string in rsp](/images/address-loop.png)
+
+it looks like it is the password we needed to get the flag!
