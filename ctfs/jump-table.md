@@ -2,6 +2,7 @@
 layout: default
 title: "Jump table in assembly"
 parent: "pwn.college writeups"
+date: 2026-05-21
 ---
 # Intro
 
