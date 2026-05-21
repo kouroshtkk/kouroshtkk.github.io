@@ -1,3 +1,7 @@
-title: "My Technical Blog"
-description: "Notes on C, Assembly, C++ and Linux."
-theme: jekyll-theme-slate
+title: "Kourosh's Blog"
+remote_theme: "b2a3e8/jekyll-theme-console"
+plugins:
+  - jekyll-remote-theme
+
+# This tells the theme to use its dark mode syntax highlighting
+highlighter: rouge
