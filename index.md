@@ -2,8 +2,8 @@
 layout: default
 title: Home
 ---
-
-[Home](/) | [About](/about/)
+![A photo of me](/profile.jpg)
+[Home](/) | [About](/about/) 
 
 # Recent Posts
 
