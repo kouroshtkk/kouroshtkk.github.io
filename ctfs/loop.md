@@ -62,6 +62,7 @@ it looks like the program loads the `argv[1]` that is pointed by `rsp+16` into `
 # Process
 
 I will run it with gdp to see what is stored is `rsp`:
+
 ![string in rsp](/images/address-loop.png)
 
 it looks like it is the password we needed to get the flag!
