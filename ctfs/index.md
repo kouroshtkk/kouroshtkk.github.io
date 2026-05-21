@@ -1,9 +1,9 @@
 ---
 layout: default
-title: "Pwn.college Writeups"
+title: "pwn.college writeups"
 nav_order: 2
 has_children: true
 ---
 
-# Pwn.college Writeups
+# pwn.college writeups
 Here are my notes and solutions for Pwn.college challenges.
