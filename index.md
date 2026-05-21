@@ -3,9 +3,11 @@ layout: default
 title: Home
 ---
 
+Welcome to my notes.
 
-# Recent Posts
+# Recent CTFs
 
-{% for post in site.posts %}
-- [{{ post.title }}]({{ post.url }}) — *{{ post.date | date: "%B %d, %Y" }}*
+{% assign ctf_pages = site.pages | where: "parent", "Pwn.college Writeups" | sort: "date" | reverse %}
+{% for node in ctf_pages %}
+- [{{ node.title }}]({{ node.url }}) - *{{ node.date | date: "%B %d, %Y" }}*
 {% endfor %}
