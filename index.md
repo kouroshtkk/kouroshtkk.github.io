@@ -3,9 +3,9 @@ layout: default
 title: Home
 ---
 
-Welcome to my notes.
+Welcome to my blog. [Learn more about me here.](/about/)
 
-# Recent CTFs
+# Recent CTF writeups
 
 {% assign ctf_pages = site.pages | where: "parent", "pwn.college writeups" | sort: "date" | reverse %}
 {% for node in ctf_pages %}
