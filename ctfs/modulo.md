@@ -26,7 +26,7 @@ lower 8 bits of `rdi` is `dil` and the lower 16 bits (2^16=65536) of `rsi` is `s
 as you can see here:
 
 
-![registers](/image/registers.png)
+![registers](/images/registers.png)
 
 
 ```nasm
