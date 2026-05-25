@@ -53,8 +53,8 @@ I got another error:
 I thought if i move to the destination registers with the same size that would work!
 
 ```nasm
-     mov al, dil
-	 mov bx, si
+mov al, dil
+mov bx, si
 ```
 and it worked! 
 I learned a thing or two in this excersize that i tought is not worth writing anything about.
