@@ -39,7 +39,7 @@ okay i got the error:
 eff-mod.s:4: Error: operand type mismatch for `mov'
 eff-mod.s:5: Error: operand type mismatch for `mov'
 ```
-and i have forgotten that the data in registers with diffrent size can not be moved around.
+and i have forgotten that the data in registers with different size can not be moved around.
 
 I have to write `movzx` to zero extend the rest of the register.
 
@@ -59,4 +59,3 @@ mov al, dil
 mov bx, si
 ```
 and it worked! 
-I learned a thing or two in this excersize that i tought is not worth writing anything about.

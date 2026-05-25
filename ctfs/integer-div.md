@@ -17,7 +17,7 @@ so result is in `rax` and `rdx` is the remainder.
 	
 # Process
 
-so if we want to calculate `speed = distance / time` we should put `distance` in `rax` because it is smaller than 64 bits and set `rdx` to zero!
+So if we want to calculate `speed = distance / time` we should put `distance` in `rax` because it is smaller than 64 bits and set `rdx` to zero!
 i like this technique so i set `rdx` to zero like this:
 
 ```nasm
