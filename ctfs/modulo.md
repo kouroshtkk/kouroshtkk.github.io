@@ -25,7 +25,9 @@ So 256 is `2^8`, we have to look at lower 8 bits of `rdi` and put it in `rax`
 lower 8 bits of `rdi` is `dil` and the lower 16 bits (2^16=65536) of `rsi` is `si`.
 as you can see here:
 
+
 ![registers](/image/registers.png)
+
 
 ```nasm
 mov rax, dil
