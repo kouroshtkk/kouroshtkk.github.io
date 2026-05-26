@@ -10,7 +10,7 @@ The challenge is to set `y` to 1 if the `rdi` is even and 0 if it is odd.
 
 ![check-even](/images/check-even.png)
 
-so in order to control if a number is even i can think of doing an `or` with immediate value of `0`.
+so in order to control if a number is even i can think of doing an `or` with immediate value of `0`**(WRONG! I have to do or with the Least significant bit!)**.
 if the result is 1 it should jump to the else part and if it is zero we set `rax` to 1.
 
 # Process
@@ -35,7 +35,7 @@ for example we have a odd number 0b0101, i set `rax = 1` then i would `xor` that
 if it was odd like our example the `xor` result would be `0` so rax is set to zero, otherwise it will be set to `1`
 
 ```text
-or 0b0101 0 => result = 1
+or 0b0101 0 => result = 1 **(Wrong again! it compares the whole register! so the result would be 0b0101)**
 mov rax, 1
 xor rax, rdi
 ```
@@ -67,3 +67,5 @@ xor rax,rdi
 ```
 
 finally it worked!
+
+I was completely wrong about doing bitwise operations with whole register data! you should extract the LSB first then compare and do bitwise operations!
