@@ -13,7 +13,7 @@ Since quad word is 64 bits, the offset is 8 bytes.
 # Process
 
 I will put the **i** value in `rbx`. 
-The sum value in **rcx**.
+The sum value in `rcx`.
 ```nasm
 xor rax,rax
 mov rbx, 1 # i=1
@@ -29,6 +29,7 @@ done:
 xor rdx,rdx # to clear top 64 bit of rdx:rax ( we only need rax )
 div rsi # rdx:rax / rsi, result goes to rax
 ```
+
 ![for-loop-error](/images/for-loop-error.png)
 
 There is a strange thing happening:
@@ -41,5 +42,6 @@ I changed it to `add rax, qword ptr [rdi]` and it worked finally, but i still do
 So let's search:
 I found a reply by **Peter Cordes** on StackOverflow:
 [SackOverFlow reply](https://stackoverflow.com/questions/2987876/what-does-dword-ptr-mean#comment137844672_2987916)
-![peter](/images/peter.png)
+
+![peter](/images/Peter.png)
 
