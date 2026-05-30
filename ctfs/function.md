@@ -106,17 +106,19 @@ The problem is that I did not take the byte pointed in the `rdi` address to call
 So first I have to save `rdi` in the stack by `push rdi`, then I have to `mov dil, bl` then call the function.
 After the function returns I have to `pop rdi`
 
-The challenge crashed, It did not gave me anything.
+The challenge crashed, It did not give me anything.
 
 I think the problem is that I did not save `rbx` neither! so let's add the push and pop for that aswell.
 
 ![error](/images/func-error-2.png)
 
-There is Two problems, first I don't know why altough I have written call 0x403000, the program calls 0x402000. 
+There is Two problems, first I don't know why although I have written call 0x403000, the program calls 0x402000. 
 Second: why when I try to write to address pointed by `rdi`, `rdi` contains zero!
 
 I got it, I have to first write the address somewhere in some register then do the call on that.
 Also I have to write one byte only on the memory address so I use
+
+`RIP` calculates the call address by `effective address = rip + displacement` that is why we got 0x402000
 
 ```nasm
 mov byte ptr [rdi], al
@@ -158,7 +160,7 @@ This was the state of your program on crash:
 |    0x0000000000404360 (+0x0048) | 48 46 4f 4a 41 4e 49 55 | 0x55494e414a4f4648 |
 +---------------------------------+-------------------------+--------------------+
 ```
-Looking at the program state `rdx` has strange data in it, and it is because I have done pop in the reverse orther of push. THE STACK IS LIFO!!!
+Looking at the program state `rdx` has strange data in it, and it is because I have done pop in the reverse order of push. THE STACK IS LIFO!!!
 
 ```nasm
 push rdi         ; Pushed FIRST
