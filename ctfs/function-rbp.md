@@ -13,6 +13,7 @@ One thing I have to understand is the indexing of **list[2]** why I have to sub 
 We have 5*4 bytes space in the Stack and we have the base pointer in `rbp`.
 So technically the base of array is `rbp`.
 For example the `rsp` is hypothetically 400:
+
 | Register / Offset | Address | Content |
 | :--- | :--- | :--- |
 | **rbp** | **400** | **Base Pointer (Start of frame)** |
