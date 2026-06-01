@@ -16,12 +16,12 @@ For example the `rsp` is hypothetically 400:
 
 | Register / Offset | Address | Content |
 | :--- | :--- | :--- |
-| **rbp** | **400** | **Base Pointer (Start of frame)** |
+| `rbp` | **400** | **Base Pointer (Start of frame)** |
 | `rbp - 4` | 396 | `List[4]` |
 | `rbp - 8` | 392 | `List[3]` |
 | `rbp - 12` | 388 | `List[2]` |
 | `rbp - 16` | 384 | `List[1]` |
-| **rbp - 20 (rsp)**| **380** | **List[0], Top of the Stack** |
+| `rbp - 20 (rsp)`| **380** | `List[0]`, **Top of the Stack** |
 
 So `[rbp-20]` is index 0,
 `[rbp-16]` is index 1,
