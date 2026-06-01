@@ -32,7 +32,81 @@ Address = Base address(rbp) + (index * element size )
 
 For example index 4 => rbp - 20 + (4 * 4 ) = rbp - 4 ;
 The array starts at the lowest memory address and goes up to arriving stack pointer.
-To be continued...
+
+In this program we have to look at each byte that is stored in the src_address and increment the respective index times 2 in the stack.
+
+We multiply by two because we have maximum 0xffff of any byte; meaning we have maximum 16 bits of occurances of any individual byte.
+
+Then we look at the saved values in the stack and and we put the byte with maximum occurance in max_freq_byte and we will return the value by putting it in `rax`.
 
 # Process
 
+First I will write the function body:
+The two first arguments for function call are:
+1. RDI: src_addr
+2. RSI: size
+
+I will use rdx as the counter for both while loops.
+
+Size and src_addr are both used in the first while loop.
+
+To implement the first while loop I have to compare `i` with `rsi`.
+
+Curr_byte is only one byte so I will use `cl` first byte of `rcx`.
+I put the first byte pointed by `[rdi + rdx]` in the `cl`.
+
+To calculate the space needed for stack, I have to subtract size * 1 byte from stack pointer. 
+
+I can't subtract registers inside bracket so I will zero extend cl and the negate it and then add to the `rbp`.
+
+```nasm
+most_common_byte:
+	mov rbp, rsp
+	sub rsp, rsi
+	mov rdx, 0
+	sub rsi, 1 # size-1
+while_loop:
+	cmp rdx, rsi
+	ja while_done
+	mov cl, byte ptr [rdi + rdx]
+	movzx rcx, cl
+	shl rcx, 1
+	neg rcx
+	inc word ptr [rbp + rcx] 
+	inc rdx
+	jmp while_loop
+while_done:
+```
+
+The second loop:
+
+We can use the first byte of rdx register from the first while loop to initialize **b**.
+
+I need 2 bytes of counter for max_freq (0xffff).
+
+I need 1 byte to store the most frequent byte.
+
+
+```nasm
+
+	mov dl, 0 # b = 0
+	mov cx, 0 # max_freq = 0 ( 2 bytes )
+	mov al, 0 # max_freq_byte = 0 ( 1 byte of RAX)
+second_loop:
+	cmp dl, 0xff
+	ja second_done
+	movzx r10, dl
+  	shl r10, 1
+	neg r10
+	cmp word ptr [rbp+r10], cx
+	jbe if_done
+	mov cx, word ptr [rbp+r10]
+	mov al, dl
+if_done:
+	inc dl
+	jmp second_loop
+second_done:
+mov rsp, rbp
+ret
+
+```
