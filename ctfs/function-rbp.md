@@ -110,3 +110,15 @@ mov rsp, rbp
 ret
 
 ```
+
+The program never finishes, first problem I see is `cmp dl, 0xff`, because dl maximum value is `255` so the loop never finishes.
+I change dl to `RDX`
+```nasm
+mov rdx, 0
+.
+.
+.
+cmp rdx,0xff
+```
+
+![rbp-error](/images/rbp-error.png)
