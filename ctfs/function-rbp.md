@@ -160,7 +160,7 @@ The problem is that I save `rsp` in `rbp` and then when index is 0 I modify the 
 ```
 and also in the second loop! and then i restore the garbage `rbp` into the `rsp` in the end! Wrong.
 
-I changed all the `rbp` to `rsp` and the problem is solved!
+I changed all the `rbp` to `rsp` and the problem is solved! I also removed the `neg` parts in the code because the `rsp` is already -0x200, We could just save from -0x200 upwards. if we use `neg` we will go even below that and it is dangerous.
 
 final code:
 
@@ -175,7 +175,6 @@ final code:
 0x40001a:	mov   	cl, byte ptr [rdi + rdx]
 0x40001d:	movzx 	rcx, cl
 0x400021:	shl   	rcx, 1
-0x400024:	neg   	rcx
 0x400027:	inc   	word ptr [rsp + rcx]
 0x40002b:	inc   	rdx
 0x40002e:	jmp   	0x400015
@@ -186,7 +185,6 @@ final code:
 0x400044:	ja    	0x400062
 0x400046:	mov   	r10, rdx
 0x400049:	shl   	r10, 1
-0x40004c:	neg   	r10
 0x40004f:	cmp   	word ptr [rsp + r10], cx
 0x400054:	jbe   	0x40005d
 0x400056:	mov   	cx, word ptr [rsp + r10]
