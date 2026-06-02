@@ -122,3 +122,79 @@ cmp rdx,0xff
 ```
 
 ![rbp-error](/images/rbp-error.png)
+
+I asked claude to review the code and there are three problems:
+
+1. In the second loop: rdx is being modified (shifted/negated) but then used as the loop counter — it's corrupted each iteration
+2. mov cx, word ptr [rbp + r10] — r10 is never set; should use the negated index to read the frequency
+3. The byte value returned should be the original byte b, not the negated/shifted index
+
+```nasm
+
+	mov rdx, 0 # b = 0
+	mov cx, 0 # max_freq = 0 ( 2 bytes )
+	mov al, 0 # max_freq_byte = 0 ( 1 byte of RAX)
+second_loop:
+x	cmp rdx, 0xff
+	ja second_done
+	mov r10, rdx
+  	shl r10, 1
+	neg r10
+	cmp word ptr [rbp+r10], cx
+	jbe if_done
+	mov cx, word ptr [rbp+r10]
+	mov al, dl
+if_done:
+	inc rdx
+	jmp second_loop
+second_done:
+mov rsp, rbp
+ret
+
+```
+I ran the program 3 times and rax is always `0x0` but the counter goes up.
+
+The problem is that I save `rsp` in `rbp` and then when index is 0 I modify the `rbp` here:
+```nasm
+0x400027:	inc   	word ptr [rbp + rcx]
+```
+and also in the second loop! and then i restore the garbage `rbp` into the `rsp` in the end! Wrong.
+
+I changed all the `rbp` to `rsp` and the problem is solved!
+
+final code:
+
+```nasm
+---------------- CODE ----------------
+0x400000:	mov   	rbp, rsp
+0x400003:	sub   	rsp, 0x200
+0x40000a:	mov   	rdx, 0
+0x400011:	sub   	rsi, 1
+0x400015:	cmp   	rdx, rsi
+0x400018:	ja    	0x400030
+0x40001a:	mov   	cl, byte ptr [rdi + rdx]
+0x40001d:	movzx 	rcx, cl
+0x400021:	shl   	rcx, 1
+0x400024:	neg   	rcx
+0x400027:	inc   	word ptr [rsp + rcx]
+0x40002b:	inc   	rdx
+0x40002e:	jmp   	0x400015
+0x400030:	mov   	rdx, 0
+0x400037:	mov   	cx, 0
+0x40003b:	mov   	al, 0
+0x40003d:	cmp   	rdx, 0xff
+0x400044:	ja    	0x400062
+0x400046:	mov   	r10, rdx
+0x400049:	shl   	r10, 1
+0x40004c:	neg   	r10
+0x40004f:	cmp   	word ptr [rsp + r10], cx
+0x400054:	jbe   	0x40005d
+0x400056:	mov   	cx, word ptr [rsp + r10]
+0x40005b:	mov   	al, dl
+0x40005d:	inc   	rdx
+0x400060:	jmp   	0x40003d
+0x400062:	mov   	rsp, rbp
+0x400065:	ret   	
+0x400066:	call  	0x400000
+--------------------------------------
+```
