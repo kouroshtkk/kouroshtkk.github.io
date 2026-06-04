@@ -5,7 +5,7 @@ title: Home
 
 Welcome to my blog. [Learn more about me here.](/about/)
 
-# Recent ctf writeups
+# Recent ctf writeups and learning writeups
 
 {% assign ctf_pages = site.pages | where: "parent", "pwn.college writeups" | sort: "date" | reverse %}
 {% for node in ctf_pages %}
