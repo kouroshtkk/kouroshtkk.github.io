@@ -11,3 +11,10 @@ Welcome to my blog. [Learn more about me here.](/about/)
 {% for node in ctf_pages %}
 - [{{ node.title }}]({{ node.url }}) - *{{ node.date | date: "%B %d, %Y" }}*
 {% endfor %}
+
+# Writing Web Server in x86 assembly
+
+{% assign ctf_pages = site.pages | where: "parent", "Web server in assembly" | sort: "date" | reverse %}                                                                                        
+{% for node in ctf_pages %}
+- [{{ node.title }}]({{ node.url }}) - *{{ node.date | date: "%B %d, %Y" }}*
+{% endfor %}
