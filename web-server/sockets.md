@@ -2,7 +2,7 @@
 layout: default
 title: "1. Setting up Sockets"
 parent: "Web server in assembly"
-nav_order: 1
+date: 2026-06-04
 ---
 
 # Setting up Sockets
